@@ -3,6 +3,8 @@ import axios from "axios";
 import { ref } from "vue";
 
 const str = ref();
+const json = ref();
+const reget = ref(true);
 
 const copy = () => {
   navigator.clipboard.writeText(str.value);
@@ -17,22 +19,40 @@ const ICPInfo = {
     "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44049102496850",
 };
 
+const reflash = () => {
+  if (json) {
+    reget.value = false;
+  } else {
+    reget.value = true;
+  }
+  getKFC();
+};
+
 const getKFC = () => {
-  axios
-    .get(
-      "https://raw.githubusercontent.com/Nthily/KFC-Crazy-Thursday/main/kfc.json"
-    )
-    .then((res) => {
-      const json = res.data;
-      str.value = json[Math.floor(Math.random() * json.length)].text;
-    });
+  if (reget) {
+    axios
+      .get(
+        "https://raw.githubusercontent.com/Nthily/KFC-Crazy-Thursday/main/kfc.json"
+      )
+      .then((res) => {
+        json.value = res.data;
+        str.value =
+          json.value[Math.floor(Math.random() * json.value.length)].text;
+      })
+      .catch((err) => {
+        str.value = "网络连接失败，请刷新重试。";
+        console.log(err);
+      });
+  } else {
+    str.value = json.value[Math.floor(Math.random() * json.value.length)].text;
+  }
 };
 
 getKFC();
 </script>
 
 <template>
-  <div style="flex: 1;">
+  <div style="flex: 1">
     <div class="title">
       <h1>KFC Crazy Thursday 文案</h1>
     </div>
@@ -41,7 +61,7 @@ getKFC();
     </div>
     <div class="btn">
       <div class="copy" @click="copy">复制</div>
-      <div class="reload" @click="getKFC()">刷新</div>
+      <div class="reload" @click="reflash()">刷新</div>
     </div>
   </div>
   <div class="footer">
