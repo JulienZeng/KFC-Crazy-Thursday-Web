@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref } from "vue";
 
-const str = ref();
+const str = ref("正在获取文案，请稍候...");
 const json = ref();
 const reget = ref(true);
 
