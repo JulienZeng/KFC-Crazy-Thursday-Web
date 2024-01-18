@@ -3,8 +3,8 @@ import axios from "axios";
 import { ref } from "vue";
 
 const str = ref("正在获取文案，请稍候...");
-const json = ref();
-const reget = ref(true);
+// const json = ref();
+// const reget = ref(true);
 
 const copy = () => {
   navigator.clipboard.writeText(str.value);
@@ -19,33 +19,42 @@ const ICPInfo = {
     "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44049102496850",
 };
 
-const reflash = () => {
-  if (json) {
-    reget.value = false;
-  } else {
-    reget.value = true;
-  }
-  getKFC();
-};
+// const reflash = () => {
+//   if (json) {
+//     reget.value = false;
+//   } else {
+//     reget.value = true;
+//   }
+//   getKFC();
+// };
 
 const getKFC = () => {
-  if (reget) {
-    axios
-      .get(
-        "https://raw.githubusercontent.com/Nthily/KFC-Crazy-Thursday/main/kfc.json"
-      )
-      .then((res) => {
-        json.value = res.data;
-        str.value =
-          json.value[Math.floor(Math.random() * json.value.length)].text;
-      })
-      .catch((err) => {
-        str.value = "网络连接失败，请刷新重试。";
-        console.log(err);
-      });
-  } else {
-    str.value = json.value[Math.floor(Math.random() * json.value.length)].text;
-  }
+  // if (reget) {
+  //   axios
+  //     .get(
+  //       "https://raw.githubusercontent.com/Nthily/KFC-Crazy-Thursday/main/kfc.json"
+  //     )
+  //     .then((res) => {
+  //       json.value = res.data;
+  //       str.value =
+  //         json.value[Math.floor(Math.random() * json.value.length)].text;
+  //     })
+  //     .catch((err) => {
+  //       str.value = "网络连接失败，请刷新重试。";
+  //       console.log(err);
+  //     });
+  // } else {
+  //   str.value = json.value[Math.floor(Math.random() * json.value.length)].text;
+  // }
+  axios
+    .get("https://api.jixs.cc/api/wenan-fkxqs/index.php")
+    .then((res) => {
+      str.value = res.data;
+    })
+    .catch((err) => {
+      str.value = "网络连接失败，请刷新重试。";
+      console.log(err);
+    });
 };
 
 getKFC();
@@ -61,7 +70,7 @@ getKFC();
     </div>
     <div class="btn">
       <div class="copy" @click="copy">复制</div>
-      <div class="reload" @click="reflash()">刷新</div>
+      <div class="reload" @click="getKFC()">刷新</div>
     </div>
   </div>
   <div class="footer">
