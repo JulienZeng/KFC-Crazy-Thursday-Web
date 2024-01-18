@@ -69,7 +69,7 @@ getKFC();
       <span>{{ str }}</span>
     </div>
     <div class="btn">
-      <div class="copy" @click="copy">复制</div>
+      <div class="copy" @click="copy()">复制</div>
       <div class="reload" @click="getKFC()">刷新</div>
     </div>
   </div>
