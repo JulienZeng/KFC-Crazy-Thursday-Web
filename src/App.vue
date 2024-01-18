@@ -42,7 +42,7 @@ getKFC();
 .kfc-text {
   padding: 20px;
   margin: 20px;
-  height: 50vh;
+  min-height: 20vh;
   display: flex;
 }
 .copy {
