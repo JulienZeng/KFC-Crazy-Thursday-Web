@@ -47,9 +47,9 @@ const getKFC = () => {
     //   str.value = json.value[Math.floor(Math.random() * json.value.length)].text;
     // }
     axios
-        .get("https://api.jixs.cc/api/wenan-fkxqs/index.php")
+        .get("https://aws7.us.julienserver.site/openapi?cmd=com.awspaas.user.apps.kfc.get")
         .then((res) => {
-            str.value = res.data;
+            str.value = res.data.data;
         })
         .catch((err) => {
             str.value = "网络连接失败，请刷新重试。";
