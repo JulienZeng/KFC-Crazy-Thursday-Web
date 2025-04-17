@@ -57,6 +57,14 @@ const getKFC = () => {
         });
 };
 
+const toGithub = () => {
+    window.open("https://github.com/JulienZeng");
+}
+
+const toBlog = () => {
+    window.open("https://blog.us.julienserver.site");
+}
+
 getKFC();
 </script>
 
@@ -82,6 +90,18 @@ getKFC();
       <a :href="ICPInfo.psbRecoadURL">{{ ICPInfo.psbNo }}</a>
     </div>
   </div> -->
+    <div class="footer">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+            <div style="margin: 0 5px;">
+                <p>Created By <span @click="toBlog" class="cursor" style="color: darkturquoise;">秋风拂春雪@Julien</span></p>
+            </div>
+            <div class="cursor" style="margin: 0 5px; display: flex; justify-content: center; align-items: center;"
+                @click="toGithub">
+                <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="github icon"
+                    style="width: 20px; height: 20px;">
+            </div>
+        </div>
+    </div>
 </template>
 
 <style scoped>
@@ -139,5 +159,9 @@ getKFC();
 .psb-logo {
     width: 20px;
     height: 20px;
+}
+
+.cursor {
+    cursor: pointer;
 }
 </style>
